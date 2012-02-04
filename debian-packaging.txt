@@ -1,6 +1,10 @@
 - deb packages are simply archives with some meta data
 - checkinstall: creates basic deb packages, but not an official package (no QA)
 - dpkg-buildpackage: wrapper for dpkg utilities
+- dch: creates debian changelog
+ (dch --create), (dch -a)
+- debdiff: compares both binary and source packages. Helps check what changed between packages
+- References - maint-guide package, manitainer's guide on debian.org
 
 Things needed for creating debian package:
 * Package in tar format, usually .tar.gz or .bz2
@@ -8,7 +12,4 @@ Things needed for creating debian package:
 * debian/control - controls what we create, what to create, which arch, who's responsible for package etc. Created by hand.
 * debian/rules - what is needed to run to build the deb file. Use dh_make template. Typically a make file with rules for build, clean and install.
 * debian/compat - compatibility level, e.g. 8
-
-- dch: creates debian changelog
- (dch --create), (dch -a)
 

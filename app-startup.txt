@@ -1,0 +1,36 @@
+Why large applications start slowly on Linux
+============================================
+
+- loading lots of libraries at startup
+- systemtap allows us to hook into interesting kernel functions to observe a physical system
+- IOGrding: IO Simulator
+- Icegrind: high precision modeling of page faults to feed the linker
+
+To blame?
+- App
+- Distros
+- ld.so
+- gcc/ld: is the linker arranging the binary wrong?
+- Linux - why are we loading 20MB data in 128K chunks
+
+- Demand paging is a strange way to load s/w
+- Disk IO pattern is a side-effect
+- CPU is idle when servicing hard faults
+- busy-waiting is a speedup
+- GCC + linker improvements
+   - paging backwards hurts
+   - GCC 4.6 groups static constructors
+   - GCC 4.7 will run static constructors forward
+- ELF workarounds with elfhack (reduces size of binary)
+- Linux paging improvements
+   - ability to page apps in larger chunks
+   - vectored madvise too?
+   - put off relocations until a page is brought in from disk
+   - support demand paging of compressed data
+   - anything else that will increase disk throughput during startup
+- Fragmentation
+   - Linux makes it easier to fragment files than Windows
+   - SQLite is the worst offender (SQLITE_FCNTL_CHUNK_SIZE is your friend)
+   - Windows has less libraries to load, no sparse files, much better profiling tools for IO (xperf)
+   - Windows uses 32K (executable) and 16K (data) chunks for paging! Laughable.
+

@@ -1,0 +1,25 @@
+Caching and Tuning fun for high scalability
+===========================================
+
+Caching
+- store data in a location that is easier and faster to retrieve.
+- cache-miss: data not stored for easy retrieval.
+
+Caching techniques
+- store entire page
+- store parts of a page (block)
+- store data retrieval (SQL query result?)
+- store complex processing result
+
+- what data can be cached?
+   - new projects: cache everything
+   - existing projects: look at mySQL slow query log, take a complete query log (remember to turn in off), check page loading time.
+
+- Caching storage
+   - disk: good for few updates, prob not for SQL querues
+     - NEVER use NFS or other network file systems
+     - disk/ramdisk storage problem: local copies, hard to sync.
+   - memcache(d): distributed memory caching, used by Facebook, Twitter, Youtube. Key-value storage system, extremely fast, non-blocking, UDP. Multiple machines -> 1 memory cache mapping.
+     - problem of memcache: not fault tolerant, no session storage, no useful authentication (use firewall)
+
+
